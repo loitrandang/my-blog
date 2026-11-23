@@ -1,20 +1,27 @@
-<!doctype html>
-<html lang="vi" data-root="">
+<!DOCTYPE html>
+<html lang="vi">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Tag - My Blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chuyên mục – Blog cá nhân</title>
 <link rel="stylesheet" href="style.css">
 </head>
-<body>
-<header class="site"><a class="brand" href="index.html">My Blog</a>
-<nav><a href="index.html">Trang chu</a> <a href="tags.html">Tag</a> <a href="about.html">Gioi thieu</a></nav></header>
+<body data-base="">
+<header class="site-header">
+  <a class="brand" href="index.html">Blog cá nhân</a>
+  <nav>
+    <a href="index.html">Trang chủ</a>
+    <a href="tags.html">Chuyên mục</a>
+    <a href="about.html">Giới thiệu</a>
+  </nav>
+</header>
 <main>
-<h1>Tag</h1>
-<p id="tags" class="tagcloud"></p>
-<ul id="list" class="posts"></ul>
+  <h1>Chuyên mục & thẻ</h1>
+  <p class="muted">Chọn một thẻ để xem các bài liên quan.</p>
+  <div id="tags" class="tags"></div>
+  <p id="empty" class="muted" hidden>Chưa có thẻ nào.</p>
 </main>
-<footer>&copy; My Blog</footer>
+<footer class="site-footer">© Blog cá nhân</footer>
 <script src="app.js"></script>
 </body>
 </html>

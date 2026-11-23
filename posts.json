@@ -1,9 +1,9 @@
 [
   {
-    "title": "Bai mau",
-    "date": "2025-01-01",
-    "tags": ["mau", "sql"],
-    "description": "Bai mau de kiem tra giao dien va highlight code.",
-    "url": "posts/bai-mau.html"
+    "title": "Bài mẫu",
+    "url": "posts/bai-mau.html",
+    "date": "2026-11-23",
+    "tags": ["mau"],
+    "summary": "Bài mẫu để kiểm tra giao diện, tìm kiếm và tô màu mã nguồn."
   }
 ]

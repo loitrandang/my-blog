@@ -1,20 +1,30 @@
-<!doctype html>
-<html lang="vi" data-root="">
+<!DOCTYPE html>
+<html lang="vi">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>My Blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blog cá nhân – Phân tích & tìm hiểu</title>
+<meta name="description" content="Nơi lưu các bài phân tích và chủ đề cần tìm hiểu.">
 <link rel="stylesheet" href="style.css">
 </head>
-<body>
-<header class="site"><a class="brand" href="index.html">My Blog</a>
-<nav><a href="index.html">Trang chu</a> <a href="tags.html">Tag</a> <a href="about.html">Gioi thieu</a></nav></header>
+<body data-base="">
+<header class="site-header">
+  <a class="brand" href="index.html">Blog cá nhân</a>
+  <nav>
+    <a href="index.html">Trang chủ</a>
+    <a href="tags.html">Chuyên mục</a>
+    <a href="about.html">Giới thiệu</a>
+  </nav>
+</header>
 <main>
-<h1>Bai viet</h1>
-<input id="q" type="search" placeholder="Tim theo tieu de, mo ta, tag..." aria-label="Tim kiem">
-<ul id="list" class="posts"></ul>
+  <h1>Bài viết mới</h1>
+  <p class="muted">Các bài phân tích và chủ đề cần tìm hiểu.</p>
+  <input id="q" type="search" placeholder="Tìm bài viết theo tiêu đề, tóm tắt, thẻ…" aria-label="Tìm kiếm bài viết">
+  <p id="filter" class="muted"></p>
+  <ul id="list" class="post-list"></ul>
+  <p id="empty" class="muted" hidden>Không tìm thấy bài viết phù hợp.</p>
 </main>
-<footer>&copy; My Blog</footer>
+<footer class="site-footer">© Blog cá nhân</footer>
 <script src="app.js"></script>
 </body>
 </html>
