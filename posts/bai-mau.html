@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bài mẫu · Blog của tôi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600&family=Lora:wght@600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <header class="site">
+    <div class="inner">
+      <a class="brand" href="../index.html">Blog của tôi</a>
+      <a href="../index.html">Bài viết</a>
+      <a href="../about.html">Giới thiệu</a>
+    </div>
+  </header>
+
+  <main>
+    <h1>Bài mẫu: đọc nhanh một báo cáo doanh thu tuần</h1>
+    <p class="meta">23/11/2026 · <span class="tag">Phân tích dữ liệu</span><span class="tag">SQL</span></p>
+
+    <blockquote>Đây là bài mẫu để xem bố cục. Số liệu và tên bảng đều là ví dụ, không phải dữ liệu thật.</blockquote>
+
+    <h2>1. Câu hỏi</h2>
+    <p>Doanh thu tuần này thay đổi thế nào so với tuần trước, và kênh nào kéo tăng hoặc giảm?</p>
+
+    <h2>2. Truy vấn</h2>
+<pre><code>SELECT
+  DATE_TRUNC(order_date, WEEK(MONDAY)) AS tuan,
+  channel,
+  SUM(net_revenue) AS doanh_thu
+FROM `project.mart.revenue_daily`   -- tên bảng ví dụ
+GROUP BY 1, 2
+ORDER BY 1 DESC, 3 DESC;</code></pre>
+
+    <h2>3. Kết luận</h2>
+    <p>Viết 2–3 câu: kết quả chính, kênh nổi bật, và việc cần làm tiếp theo.</p>
+
+    <p><a href="../index.html">← Về trang chủ</a></p>
+  </main>
+
+  <footer class="site">© 2026 Blog của tôi</footer>
+</body>
+</html>
