@@ -1,46 +1,27 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Bài mẫu · Blog của tôi</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600&family=Lora:wght@600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bai mau - My Blog</title>
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
 </head>
 <body>
-  <header class="site">
-    <div class="inner">
-      <a class="brand" href="../index.html">Blog của tôi</a>
-      <a href="../index.html">Bài viết</a>
-      <a href="../about.html">Giới thiệu</a>
-    </div>
-  </header>
-
-  <main>
-    <h1>Bài mẫu: đọc nhanh một báo cáo doanh thu tuần</h1>
-    <p class="meta">23/11/2026 · <span class="tag">Phân tích dữ liệu</span><span class="tag">SQL</span></p>
-
-    <blockquote>Đây là bài mẫu để xem bố cục. Số liệu và tên bảng đều là ví dụ, không phải dữ liệu thật.</blockquote>
-
-    <h2>1. Câu hỏi</h2>
-    <p>Doanh thu tuần này thay đổi thế nào so với tuần trước, và kênh nào kéo tăng hoặc giảm?</p>
-
-    <h2>2. Truy vấn</h2>
-<pre><code>SELECT
-  DATE_TRUNC(order_date, WEEK(MONDAY)) AS tuan,
-  channel,
-  SUM(net_revenue) AS doanh_thu
-FROM `project.mart.revenue_daily`   -- tên bảng ví dụ
-GROUP BY 1, 2
-ORDER BY 1 DESC, 3 DESC;</code></pre>
-
-    <h2>3. Kết luận</h2>
-    <p>Viết 2–3 câu: kết quả chính, kênh nổi bật, và việc cần làm tiếp theo.</p>
-
-    <p><a href="../index.html">← Về trang chủ</a></p>
-  </main>
-
-  <footer class="site">© 2026 Blog của tôi</footer>
+<header class="site"><a class="brand" href="../index.html">My Blog</a>
+<nav><a href="../index.html">Trang chu</a> <a href="../tags.html">Tag</a> <a href="../about.html">Gioi thieu</a></nav></header>
+<main>
+<article>
+<h1>Bai mau</h1>
+<div class="meta">2025-01-01 &middot; <a class="tag" href="../tags.html#mau">mau</a><a class="tag" href="../tags.html#sql">sql</a></div>
+<p>Day la bai mau. Doan code ben duoi duoc to mau bang highlight.js.</p>
+<pre><code class="language-sql">SELECT order_date, SUM(amount) AS revenue
+FROM orders
+GROUP BY order_date;</code></pre>
+</article>
+</main>
+<footer>&copy; My Blog</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
 </body>
 </html>
