@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Phân lớp trong dbt: staging, intermediate, mart</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<main>
+<article>
+<h1>Phân lớp trong dbt: staging, intermediate, mart</h1>
+<p class="meta"><time datetime="NGAY_DANG">NGAY_DANG</time> | Tag: dbt, data-modeling, bigquery</p>
+
+<h2>Vì sao cần phân lớp?</h2>
+<p>Khi project dbt lớn dần, việc gom hết logic vào một câu SQL khiến model khó đọc, khó test và khó tái sử dụng. Phân lớp giúp mỗi model chỉ làm một việc rõ ràng.</p>
+
+<h2>Staging</h2>
+<p>Lớp đầu tiên, nối trực tiếp với dữ liệu nguồn. Mỗi bảng nguồn thường có một model staging, chỉ làm việc nhẹ: đổi tên cột, ép kiểu dữ liệu, chuẩn hóa định dạng. Chưa join và chưa áp business rule.</p>
+
+<h2>Intermediate</h2>
+<p>Lớp trung gian, nơi gom các bước biến đổi phức tạp: join nhiều bảng staging, tính toán, áp business rule. Lớp này giúp tách logic để mart không bị rối.</p>
+
+<h2>Mart</h2>
+<p>Lớp cuối, phục vụ người dùng và công cụ BI như Looker, Tableau, Power BI. Bảng mart được đặt theo nghiệp vụ (ví dụ đơn hàng, khách hàng) và sẵn sàng để làm report.</p>
+
+<h2>Ví dụ minh họa</h2>
+<p>Đoạn SQL dưới đây chỉ là ví dụ minh họa, tên bảng và cột là giả định:</p>
+<pre><code>-- stg_orders.sql
+select
+  id as order_id,
+  cast(created_at as timestamp) as created_at,
+  lower(status) as status
+from {{ source('shop', 'orders') }}</code></pre>
+
+<h2>Kết luận</h2>
+<p>Staging làm sạch, intermediate xử lý logic, mart phục vụ báo cáo. Chia lớp rõ ràng giúp project dễ bảo trì và dễ kiểm thử.</p>
+</article>
+<p><a href="../index.html">← Về trang chủ</a></p>
+</main>
+</body>
+</html>
