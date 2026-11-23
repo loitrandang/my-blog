@@ -1,9 +1,5 @@
 [
-  {
-    "title": "Bài mẫu",
-    "url": "posts/bai-mau.html",
-    "date": "2026-11-23",
-    "tags": ["mau"],
-    "summary": "Bài mẫu để kiểm tra giao diện, tìm kiếm và tô màu mã nguồn."
-  }
+  {"title":"Phân lớp trong dbt: staging, intermediate, mart","slug":"phan-lop-dbt-staging-intermediate-mart","url":"posts/phan-lop-dbt-staging-intermediate-mart.html","date":"2026-11-23","tags":["dbt","data-modeling","BigQuery"]},
+  {"title":"Nguyên tắc thiết kế DAG Airflow","slug":"nguyen-tac-thiet-ke-dag-airflow","url":"posts/nguyen-tac-thiet-ke-dag-airflow.html","date":"2026-11-23","tags":["Airflow","data-engineering","dag","orchestration"]},
+  {"title":"Giảm chi phí query BigQuery: 4 cách đơn giản","slug":"giam-chi-phi-query-bigquery","url":"posts/giam-chi-phi-query-bigquery.html","date":"2026-11-23","tags":["BigQuery","SQL","Tối ưu chi phí"]}
 ]
