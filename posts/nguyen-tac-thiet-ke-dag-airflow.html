@@ -3,47 +3,53 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Nguyên tắc thiết kế DAG Airflow</title>
+<title>Nguyên tắc thiết kế DAG Airflow: bốn điều cần nhớ</title>
 <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-<p><a href="../index.html">← Trang chủ</a></p>
+<main>
 <article>
-  <h1>Nguyên tắc thiết kế DAG Airflow</h1>
-  <p><time datetime="2026-11-23">2026-11-23</time> | Tag: Airflow, data-engineering, dag, orchestration</p>
+  <h1>Nguyên tắc thiết kế DAG Airflow: bốn điều cần nhớ</h1>
+  <p class="meta">Ngày đăng: NGAY_DANG | Tag: airflow, data-engineering, dag, orchestration</p>
 
   <h2>1. Lịch chạy</h2>
-  <p>Chọn lịch theo nhịp cập nhật của nguồn data, không theo thói quen. Đặt <code>catchup</code> có chủ đích và đặt <code>start_date</code> cố định, tránh dùng thời gian động.</p>
+  <p>Chọn lịch theo nhịp cập nhật của nguồn data, không theo thói quen. Đặt <code>catchup</code> có chủ đích và ghi rõ múi giờ để tránh chạy lệch ngày.</p>
 
   <h2>2. Phụ thuộc task</h2>
-  <p>Mỗi task chỉ làm một việc rõ ràng, ví dụ extract, load hoặc transform. Khai báo phụ thuộc tường minh để dễ đọc và dễ chạy lại từng bước. Tránh DAG quá lớn, hãy tách theo nguồn hoặc theo domain.</p>
+  <p>Chia task nhỏ, mỗi task làm một việc. Chỉ khai báo phụ thuộc thật sự cần thiết. Nhờ vậy khi lỗi, bạn chạy lại đúng phần hỏng thay vì cả DAG.</p>
 
   <h2>3. Retry</h2>
-  <p>Đặt <code>retries</code> và <code>retry_delay</code> cho lỗi tạm thời như mạng hay API quá tải. Có thể dùng exponential backoff. Lỗi logic thì retry không giúp được gì, cần có cảnh báo để xử lý.</p>
+  <p>Đặt số lần retry và khoảng chờ hợp lý cho lỗi tạm thời như mạng hay API quá tải. Lỗi logic thì retry không giúp được gì, cần báo động để người xử lý.</p>
 
   <h2>4. Idempotent</h2>
-  <p>Chạy lại cùng một kỳ phải cho cùng kết quả, không nhân đôi data. Hãy ghi theo phân vùng ngày hoặc dùng MERGE thay vì INSERT thuần, và lấy dữ liệu theo khoảng thời gian của kỳ chạy.</p>
+  <p>Chạy lại cùng một kỳ dữ liệu phải cho cùng kết quả, không nhân đôi dòng. Cách thường dùng là ghi đè theo partition ngày hoặc dùng MERGE thay vì chỉ INSERT.</p>
 
-  <h2>Code minh họa</h2>
-  <p><em>Đây là đoạn code minh họa, không phải DAG chạy thật.</em></p>
-  <pre><code class="language-python">from datetime import datetime, timedelta
+  <p><strong>Đoạn code dưới đây chỉ là minh họa, không phải cấu hình của dự án thật.</strong></p>
+  <pre><code class="language-python">
+from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 
-def extract(ds, **_): ...   # lấy data theo ngày ds
-def load(ds, **_): ...      # ghi đè phân vùng ds
+def extract(ds, **_):
+    print(f"Lấy dữ liệu ngày {ds}")
+
+def load(ds, **_):
+    print(f"Ghi đè partition ngày {ds}")
 
 with DAG(
-    dag_id="demo_daily",
+    dag_id="vi_du_minh_hoa",
     start_date=datetime(2024, 1, 1),
     schedule="@daily",
     catchup=False,
-    default_args={"retries": 3, "retry_delay": timedelta(minutes=5)},
+    default_args={"retries": 2, "retry_delay": timedelta(minutes=5)},
 ) as dag:
     t1 = PythonOperator(task_id="extract", python_callable=extract)
     t2 = PythonOperator(task_id="load", python_callable=load)
-    t1 &gt;&gt; t2</code></pre>
-  <p>Lưu ý: tham số <code>schedule</code> dùng cho Airflow 2.4 trở lên. Bản cũ hơn dùng <code>schedule_interval</code>.</p>
+    t1 >> t2
+  </code></pre>
+
+  <p>Tóm lại: lịch rõ ràng, task nhỏ, retry có chừng mực, và luôn chạy lại được an toàn.</p>
 </article>
+</main>
 </body>
 </html>

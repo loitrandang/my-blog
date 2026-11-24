@@ -3,40 +3,39 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Giảm chi phí query BigQuery: 4 cách đơn giản</title>
+<title>Giảm chi phí query BigQuery: 4 thói quen nên có</title>
 <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-<p><a href="../index.html">← Trang chủ</a></p>
+<main>
 <article>
-  <h1>Giảm chi phí query BigQuery: 4 cách đơn giản</h1>
-  <p class="meta"><time datetime="2026-11-23">2026-11-23</time> | Tag: BigQuery, SQL, Tối ưu chi phí</p>
+  <h1>Giảm chi phí query BigQuery: 4 thói quen nên có</h1>
+  <p class="meta">Đăng ngày: NGAY_DANG | Tag: bigquery, toi-uu-chi-phi, sql</p>
 
-  <p>BigQuery tính phí theo lượng dữ liệu mà query quét. Vì vậy, quét ít hơn nghĩa là chi phí thấp hơn.</p>
+  <p>BigQuery tính phí chủ yếu theo lượng dữ liệu mà query quét. Vì vậy, quét ít hơn nghĩa là chi phí thấp hơn.</p>
 
   <h2>1. Chọn cột thay vì SELECT *</h2>
-  <p>BigQuery lưu dữ liệu theo cột. Chỉ chọn cột cần dùng thì lượng dữ liệu quét sẽ giảm đáng kể.</p>
+  <p>BigQuery lưu dữ liệu theo cột. Chỉ chọn những cột cần dùng để tránh phải đọc cả bảng.</p>
 
   <h2>2. Dùng partition</h2>
-  <p>Chia bảng theo ngày (hoặc theo một cột phù hợp). Khi lọc đúng cột partition, BigQuery chỉ đọc các phân vùng liên quan.</p>
+  <p>Chia bảng theo ngày (hoặc theo khoảng thời gian). Khi lọc đúng cột partition, BigQuery chỉ quét các partition liên quan.</p>
 
   <h2>3. Dùng cluster</h2>
-  <p>Cluster sắp xếp dữ liệu theo các cột hay lọc hoặc join. Cách này giúp bỏ qua những khối dữ liệu không cần thiết.</p>
+  <p>Cluster sắp xếp dữ liệu theo một số cột hay lọc, ví dụ mã khách hàng hoặc mã đơn. Cách này giúp giảm lượng dữ liệu phải đọc.</p>
 
   <h2>4. Xem bytes trước khi chạy</h2>
-  <p>Giao diện BigQuery hiển thị ước tính dung lượng sẽ xử lý ở góc trên bên phải trình soạn thảo. Có thể dùng thêm chế độ dry run để kiểm tra mà không chạy thật.</p>
+  <p>Giao diện BigQuery hiển thị ước tính dung lượng sẽ xử lý trước khi chạy. Hãy xem con số này, hoặc dùng chế độ dry run, để kiểm tra trước khi thực thi.</p>
 
-  <h2>Ví dụ (chỉ để minh họa)</h2>
-  <p>Tên bảng và cột dưới đây là giả định.</p>
-  <pre><code>-- Tốn kém: quét toàn bộ cột
-SELECT * FROM my_dataset.orders;
-
--- Tiết kiệm hơn: chọn cột + lọc theo partition
+  <h3>Ví dụ SQL (chỉ để minh họa)</h3>
+  <pre><code>-- Minh họa: tên bảng và cột là giả định
 SELECT order_id, amount
 FROM my_dataset.orders
-WHERE order_date BETWEEN '2024-01-01' AND '2024-01-07';</code></pre>
+WHERE order_date BETWEEN '2024-01-01' AND '2024-01-07'
+  AND customer_id = 'C001';</code></pre>
+  <p>Query này chọn đúng hai cột, lọc theo cột partition (<code>order_date</code>) và cột cluster (<code>customer_id</code>). Giả định: bảng được partition theo <code>order_date</code> và cluster theo <code>customer_id</code>.</p>
 
-  <p>Bài viết không nêu giá tiền cụ thể. Hãy xem bảng giá chính thức của Google Cloud để biết mức phí hiện hành.</p>
+  <p>Kết luận: chọn đúng cột, lọc theo partition, tận dụng cluster và luôn kiểm tra bytes ước tính.</p>
 </article>
+</main>
 </body>
 </html>

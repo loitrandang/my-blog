@@ -7,10 +7,10 @@
 <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-<p><a href="../index.html">← Trang chủ</a></p>
+<main>
 <article>
 <h1>Phân lớp trong dbt: staging, intermediate, mart</h1>
-<p class="meta"><time datetime="2026-11-23">2026-11-23</time> | Tag: dbt, data-modeling, BigQuery</p>
+<p class="meta">Ngày đăng: NGAY_DANG | Tag: dbt, data-modeling, bigquery</p>
 <h2>Vì sao cần phân lớp?</h2>
 <p>Khi project dbt lớn dần, việc gom hết logic vào một câu SQL khiến model khó đọc, khó test và khó tái sử dụng. Phân lớp giúp mỗi model chỉ làm một việc rõ ràng.</p>
 <h2>Staging</h2>
@@ -26,9 +26,10 @@ select
   id as order_id,
   cast(created_at as timestamp) as created_at,
   lower(status) as status
-from &#123;&#123; source('shop', 'orders') &#125;&#125;</code></pre>
+from {{ source('shop', 'orders') }}</code></pre>
 <h2>Kết luận</h2>
 <p>Staging làm sạch, intermediate xử lý logic, mart phục vụ báo cáo. Chia lớp rõ ràng giúp project dễ bảo trì và dễ kiểm thử.</p>
 </article>
+</main>
 </body>
 </html>
